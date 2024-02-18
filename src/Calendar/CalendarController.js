@@ -1,13 +1,12 @@
 import moment from "moment";
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Calendar } from "./Calendar";
 import { Modal } from "../Modal/Modal";
 import { NewEventForm } from "../Forms/NewEventForms";
 import { getEventData } from "../Data/DataUtil";
 
 export const CalendarController = () => {
-    // Get hard-coded data
-    
+        
     const today = moment();
     const [currentMonthMoment, setCurrentMonthMoment] = useState(today);
     const [events, setEvents] = useState([]);

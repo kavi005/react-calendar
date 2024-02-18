@@ -16,7 +16,11 @@ export const CalendarCell = ({ dateNumber = '', events = [], onEventClicked }) =
     return (
         <Cell>
             { dateNumber }
-            { events.map(event => <Event key={event.id} name={event.name} time={event.time} onClick={onEventClicked} />)}
+            { events.map(event => <Event key={event.id} 
+                name={event.name} 
+                time={event.time}
+                isRecurrent={event.isRecurrent}
+                onClick={onEventClicked} />)}
         </Cell>
     )
 }
