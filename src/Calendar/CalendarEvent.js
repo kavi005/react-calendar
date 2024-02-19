@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { FaRepeat } from "react-icons/fa6";
+import { useContext } from "react";
+import { ModalContext } from "./CalendarController";
 
 const EventBox = styled.div`
         display: flex;
@@ -19,15 +21,14 @@ const EventBox = styled.div`
             background-color: #50577A;
         }
     `;
-export const Event = ({ name, time, isRecurrent, bgColor, onEventBoxClicked }) => {
-    
+export const Event = ({ id, name, time, isRecurrent, bgColor }) => {
+    const displayModal = useContext(ModalContext);
+
     return (
-        <EventBox bgColor={bgColor}>{name} - {time} {isRecurrent && <FaRepeat />}</EventBox>
+        <>
+        <EventBox onClick={() => displayModal(id)} bgColor={bgColor}>{name} - {time} {isRecurrent && <FaRepeat />}</EventBox>
+        </>
     )
 }
 
-/* onClick={() => onEventBoxClicked(
-    dayMoment.format('DD'),
-    dayMoment.format('MM'),
-    dayMoment.format('YYYY')
-)} */
+// (id) => displayModal(id)

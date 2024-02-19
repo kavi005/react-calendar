@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     Nav,
     NavLink,
@@ -8,10 +8,13 @@ import {
     NavBtnLink,
 } from "./NavBarElements";
 import { useNavigate } from "react-router-dom";
+import { UserSessionContext } from "../App";
  
 const Navbar = () => {
     const navigate = useNavigate();
     const [buttonText, setButtonText] = useState('Sign In');
+
+    const userContext = useContext(UserSessionContext);
 
     const onClickSignIn = () => {
         localStorage.removeItem('user');
@@ -22,27 +25,28 @@ const Navbar = () => {
         const token = localStorage.getItem('user');
         if(!token) {
             setButtonText('Sign In');
-            navigate("/Login");
+            navigate("/login");
           
         } else {
             setButtonText('Log Out');
         }
-    });
+        
+    },[userContext]);
 
     return (
         <>
         <Nav>
             <Bars /> 
             <NavMenu>
-                <NavLink to="/Home" >
+                <NavLink to="/" >
                     Home
                 </NavLink>
-                <NavLink to="/shedule">
+                <NavLink to="/schedule">
                     Schedule
                 </NavLink>                    
             </NavMenu>
             <NavBtn>
-                <NavBtnLink onClick={onClickSignIn} to="/Login">
+                <NavBtnLink onClick={onClickSignIn} to="/login">
                     {buttonText}
                 </NavBtnLink>
             </NavBtn>

@@ -121,3 +121,11 @@ button {
     font-size: 14px;
     padding: 12px;
 }
+
+.detailhead {
+  font-weight: 700;
+}
+
+.modal-button {
+  text-align: center;
+}

@@ -23,12 +23,14 @@ export const Modal = ({ children, shouldShow, onRequestClose }) => {
         <>
         {shouldShow && (
             <ModalBackground>
-                <ModalBody onClick={e => e.stopPropagation()}>
-                    <button onClick={onRequestClose}>Hide Modal</button>
+                <ModalBody>
                     {children}
+                    <div><button className="modal-button" onClick={onRequestClose}>Close</button></div>
                 </ModalBody>
             </ModalBackground>
         )}
         </>
     )
 }
+
+{/* <ModalBody onClick={e => e.stopPropagation()}></ModalBody> */}

@@ -1,6 +1,6 @@
 import moment from "moment";
 import styled from 'styled-components';
-import { getDaysInMonth, segmentIntoWeeks, daysOfTheWeek, padWeekFront, padWeekBack } from "./util";
+import { getDaysInMonth, segmentIntoWeeks, daysOfTheWeek, padWeekFront, padWeekBack } from "./CalendarUtil";
 import { CalendarCell } from "./CalendarCell";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
@@ -53,7 +53,7 @@ const CalendarCellWrap = styled.div`
     flex: 1;
 `;
 
-export const Calendar = ({ month, year, onPrev, onNext, onCellClicked, getCellProps }) => {
+export const Calendar = ({ month, year, onPrev, onNext, getCellProps }) => {
     const currentMonthMoment = moment(`${month}${year}`, 'MMYYYY');
     const weeks = segmentIntoWeeks(getDaysInMonth(currentMonthMoment));    
 
@@ -85,13 +85,13 @@ export const Calendar = ({ month, year, onPrev, onNext, onCellClicked, getCellPr
                             { displayWeek.map((dayMoment, j) => {
                                 
                                 return (
-                                    <CalendarCellWrap onClick={() => onCellClicked(
-                                        dayMoment.format('DD'),
-                                        dayMoment.format('MM'),
-                                        dayMoment.format('YYYY')
-                                    )}>
+                                    <CalendarCellWrap>
                                         {dayMoment
-                                        ? <CalendarCell key={ dayMoment.format('D') } dateNumber={dayMoment.format('D')} {...getCellProps(dayMoment)}></CalendarCell>
+                                        ? <CalendarCell key={ dayMoment.format('D') } 
+                                            dateNumber={dayMoment.format('D')} 
+                                            {...getCellProps(dayMoment)}>
+
+                                            </CalendarCell>
                                         : <CalendarCell key={`${i}${j}`}></CalendarCell>}
                                     </CalendarCellWrap>
                                 )

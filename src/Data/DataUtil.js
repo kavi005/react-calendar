@@ -26,3 +26,17 @@ export const getEventData = () => {
 
     return eventDataList;
 }
+
+export const getAllPropertiesOfEvent = () => {
+    
+    let eventDataList = [];
+    for (let i = 0; i < eventsData.length; i++) {        
+        const eventStartTimestamp = eventsData[i]["eventStartTimestamp"];
+    
+        if(eventStartTimestamp) {            
+            eventDataList.push(eventsData[i]);
+        }        
+    }
+
+    return eventDataList;
+}

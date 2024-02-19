@@ -20,22 +20,22 @@ const Login = (props) => {
         return;
     }
 
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+    /* if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
         setEmailError('Please enter a valid email');
         return;
-    }
+    } */
 
     if ('' === password) {
         setPasswordError('Please enter a password');
         return;
     }
 
-    if (password.length < 7) {
+    /* if (password.length < 7) {
         setPasswordError('The password must be 8 characters or longer');
         return;
-    }
+    } */
 
-    if (email == "test@test.com" && password == "test123") {
+    if (email == "test" && password == "test") {
         localStorage.setItem('user', JSON.stringify({email}));
         props.setLoggedIn(true);
         navigate("/schedule");
