@@ -42,7 +42,6 @@ export const CalendarController = () => {
 
     /* const createNewEvent = (name, time) => {
         setEvents(events.concat({ name, time, date: selectedDate }));
-        console.log(events);
         setShowNewEventModal(false);
         setSelectedDate(null);
     } */
@@ -56,7 +55,6 @@ export const CalendarController = () => {
         
         const selectedEvent = getAllPropertiesOfEvent().filter(ev => { return ev.id === eventId});
         const currEvent = events.filter(ev => ev.id === eventId);
-        console.log(currEvent[0].date);
         setSelectedDate(moment(currEvent[0].date, 'YYYY-MM-DD'));
         setSelectedEvent(selectedEvent);
         setShowNewEventModal(true);

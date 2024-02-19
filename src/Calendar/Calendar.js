@@ -30,10 +30,11 @@ const CalendarTableWrap = styled.div`
     height: 100%;
 `;
 const CalendarTable = styled.div`
-    height: 85%;
+    height: 85vh;
     display: flex;
     flex-direction: column;
-    width: 100%
+    width: auto;
+    padding: 0 8px 0 8px;   
 `;
 const CalendarRow = styled.div`
     display: flex;
