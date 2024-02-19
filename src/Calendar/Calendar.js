@@ -1,7 +1,8 @@
 import moment from "moment";
 import styled from 'styled-components';
-import { getDaysInMonth, segmentIntoWeeks, daysOfTheWeek, padWeekFront, padWeekBack } from "./util";
+import { getDaysInMonth, segmentIntoWeeks, daysOfTheWeek, padWeekFront, padWeekBack } from "./CalendarUtil";
 import { CalendarCell } from "./CalendarCell";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const CalendarControlsWrap = styled.div`
     height: 15%;
@@ -16,14 +17,17 @@ const CalendarControls = styled.div`
     button {
         width: 45%;
         margin: 0 2%;
+        padding: 10px
     }
 `;
 const CalendarTableWrap = styled.div`
-    position: absolute;
-    top: 0;
+    // position: relative;
+    /* top: 0;
     right: 0;
     left: 0;
-    bottom: 0;
+    bottom: 0; */
+    width: 100%;
+    height: 100%;
 `;
 const CalendarTable = styled.div`
     height: 85%;
@@ -42,13 +46,14 @@ const CalendarHeading = styled.div`
 const CalendarHeadingCell = styled.div`
     flex: 1;
     text-align: center;
+    font-weight: 700;
 `;
 const CalendarCellWrap = styled.div`
     padding: 0px;
     flex: 1;
 `;
 
-export const Calendar = ({ month, year, onPrev, onNext, onCellClicked, getCellProps }) => {
+export const Calendar = ({ month, year, onPrev, onNext, getCellProps }) => {
     const currentMonthMoment = moment(`${month}${year}`, 'MMYYYY');
     const weeks = segmentIntoWeeks(getDaysInMonth(currentMonthMoment));    
 
@@ -58,8 +63,8 @@ export const Calendar = ({ month, year, onPrev, onNext, onCellClicked, getCellPr
             <CalendarControlsWrap>
                 <CalendarControls>
                     <h1>{ currentMonthMoment.format('MMMM YYYY') }</h1>
-                    <button onClick={onPrev}>Previous</button>
-                    <button onClick={onNext}>Next</button>
+                    <button onClick={onPrev}><FaArrowLeft /> Previous</button>
+                    <button onClick={onNext}>Next <FaArrowRight /></button>
                 </CalendarControls>                
             </CalendarControlsWrap>
 
@@ -80,13 +85,13 @@ export const Calendar = ({ month, year, onPrev, onNext, onCellClicked, getCellPr
                             { displayWeek.map((dayMoment, j) => {
                                 
                                 return (
-                                    <CalendarCellWrap onClick={() => onCellClicked(
-                                        dayMoment.format('DD'),
-                                        dayMoment.format('MM'),
-                                        dayMoment.format('YYYY')
-                                    )}>
+                                    <CalendarCellWrap>
                                         {dayMoment
-                                        ? <CalendarCell key={ dayMoment.format('D') } dateNumber={dayMoment.format('D')} {...getCellProps(dayMoment)}></CalendarCell>
+                                        ? <CalendarCell key={ dayMoment.format('D') } 
+                                            dateNumber={dayMoment.format('D')} 
+                                            {...getCellProps(dayMoment)}>
+
+                                            </CalendarCell>
                                         : <CalendarCell key={`${i}${j}`}></CalendarCell>}
                                     </CalendarCellWrap>
                                 )
