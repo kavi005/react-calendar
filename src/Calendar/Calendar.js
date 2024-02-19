@@ -2,7 +2,7 @@ import moment from "moment";
 import styled from 'styled-components';
 import { getDaysInMonth, segmentIntoWeeks, daysOfTheWeek, padWeekFront, padWeekBack } from "./util";
 import { CalendarCell } from "./CalendarCell";
-import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const CalendarControlsWrap = styled.div`
     height: 15%;
@@ -17,14 +17,17 @@ const CalendarControls = styled.div`
     button {
         width: 45%;
         margin: 0 2%;
+        padding: 10px
     }
 `;
 const CalendarTableWrap = styled.div`
-    position: absolute;
-    top: 0;
+    // position: relative;
+    /* top: 0;
     right: 0;
     left: 0;
-    bottom: 0;
+    bottom: 0; */
+    width: 100%;
+    height: 100%;
 `;
 const CalendarTable = styled.div`
     height: 85%;
@@ -43,6 +46,7 @@ const CalendarHeading = styled.div`
 const CalendarHeadingCell = styled.div`
     flex: 1;
     text-align: center;
+    font-weight: 700;
 `;
 const CalendarCellWrap = styled.div`
     padding: 0px;
@@ -59,8 +63,8 @@ export const Calendar = ({ month, year, onPrev, onNext, onCellClicked, getCellPr
             <CalendarControlsWrap>
                 <CalendarControls>
                     <h1>{ currentMonthMoment.format('MMMM YYYY') }</h1>
-                    <button onClick={onPrev}><GoArrowLeft /> Previous</button>
-                    <button onClick={onNext}>Next <GoArrowRight /></button>
+                    <button onClick={onPrev}><FaArrowLeft /> Previous</button>
+                    <button onClick={onNext}>Next <FaArrowRight /></button>
                 </CalendarControls>                
             </CalendarControlsWrap>
 

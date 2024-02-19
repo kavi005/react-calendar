@@ -21,14 +21,14 @@ export const Modal = ({ children, shouldShow, onRequestClose }) => {
 
     return (
         <>
-            {shouldShow && (
-                <ModalBackground>
-                    <ModalBody onClick={e => e.stopPropagation()}>
-                        <button onClick={onRequestClose}>Hide Modal</button>
-                        {children}
-                    </ModalBody>
-                </ModalBackground>
-            )}
+        {shouldShow && (
+            <ModalBackground>
+                <ModalBody onClick={e => e.stopPropagation()}>
+                    <button onClick={onRequestClose}>Hide Modal</button>
+                    {children}
+                </ModalBody>
+            </ModalBackground>
+        )}
         </>
     )
 }
