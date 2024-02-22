@@ -1,31 +1,47 @@
 import moment from "moment";
 import styled from 'styled-components';
-import { getDaysInMonth, segmentIntoWeeks, daysOfTheWeek, padWeekFront, padWeekBack } from "./CalendarUtil";
+import { getDaysInMonth, segmentIntoWeeks, daysOfTheWeek, padWeekFront, padWeekBack, monthOfTheYear, getYearsList } from "./CalendarUtil";
 import { CalendarCell } from "./CalendarCell";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 const CalendarControlsWrap = styled.div`
-    height: 15%;
+    height: 10%;
     align: center;
-    margin: 20px;
+    margin: 15px;
+`;
+const TodayControl = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-content: start;
+    margin-right: 20px;
+`;
+const NavigationControl = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-content: start;
 `;
 const CalendarControls = styled.div`
+    display: flex;
+    justify-content: center;
     margin: auto;
-    max-width: 400px;
+    width: 100%;
+    // max-width: 400px;
     text-align: center;
 
-    button {
-        width: 45%;
+    select {        
         margin: 0 2%;
-        padding: 10px
+        padding: 8px;
+        font-size: large;
+        font-weight: 800;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px
     }
 `;
 const CalendarTableWrap = styled.div`
-    // position: relative;
-    /* top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0; */
     width: 100%;
     height: 100%;
 `;
@@ -54,18 +70,57 @@ const CalendarCellWrap = styled.div`
     flex: 1;
 `;
 
-export const Calendar = ({ month, year, onPrev, onNext, getCellProps }) => {
-    const currentMonthMoment = moment(`${month}${year}`, 'MMYYYY');
-    const weeks = segmentIntoWeeks(getDaysInMonth(currentMonthMoment));    
+export const Calendar = ({ month, year, onPrev, onNext, onDateChange, getCellProps }) => {
+    const [selectedMonth, setSelectedMonth] = useState(month);
+    const [selectedYear, setSelectedYear] = useState(year);
+
+    let currentMonthMoment = moment(`${month}${year}`, 'MMYYYY');
+    let weeks = segmentIntoWeeks(getDaysInMonth(currentMonthMoment));
+
+    const monthsList = Object.keys(monthOfTheYear);
+    let yearList = getYearsList(year);
+
+    useEffect(() => {
+        setSelectedMonth(currentMonthMoment.format('MMMM'));
+        setSelectedYear(year);        
+    }, [month, year]);
+
+    const onMonthChange = (event) => {
+        const selectedMonth = event.target.value;
+        setSelectedMonth(selectedMonth);
+        onDateChange(selectedMonth);        
+    };
+
+    const onYearChange = (event) => {
+        const selectedYear = event.target.value;
+        setSelectedYear(selectedYear);
+        onDateChange(selectedYear);
+    };
+
+    const onToday = () => {
+        onDateChange();
+    }
 
     return (
         <>
         <CalendarTableWrap>
             <CalendarControlsWrap>
                 <CalendarControls>
-                    <h1>{ currentMonthMoment.format('MMMM YYYY') }</h1>
-                    <button onClick={onPrev}><FaArrowLeft /> Previous</button>
-                    <button onClick={onNext}>Next <FaArrowRight /></button>
+                    <TodayControl><button onClick={onToday}>Today</button></TodayControl>
+                    <NavigationControl>
+                        <button onClick={onPrev}><FaArrowLeft /></button>
+                        <select value={selectedMonth} onChange={onMonthChange}>
+                            {monthsList.map((month, i) => (
+                                <option key={i} value={month}>{month}</option>
+                            ))}
+                        </select>
+                        <select value={selectedYear} onChange={onYearChange}>
+                            {yearList.map((year, j) => (
+                                <option key={j} value={year}>{year}</option>
+                            ))}
+                        </select>                    
+                        <button onClick={onNext}><FaArrowRight /></button>
+                    </NavigationControl>
                 </CalendarControls>                
             </CalendarControlsWrap>
 

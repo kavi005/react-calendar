@@ -40,6 +40,15 @@ export const CalendarController = () => {
         setCurrentMonthMoment(moment(currentMonthMoment.subtract(1, 'months')));
     }
 
+    const onDateChange = (event) => {
+        if (!event) {
+            setCurrentMonthMoment(today);
+        } else if (isNaN(parseInt(event))) {
+            setCurrentMonthMoment(moment(currentMonthMoment.month(event)));
+        } else {
+            setCurrentMonthMoment(moment(currentMonthMoment.year(event)));
+        }
+    }
     /* const createNewEvent = (name, time) => {
         setEvents(events.concat({ name, time, date: selectedDate }));
         setShowNewEventModal(false);
@@ -49,7 +58,7 @@ export const CalendarController = () => {
     /* const displayModal = (date, month, year) => {
         setSelectedDate(moment(`${date}${month}${year}`, 'DDMMYYYY'));
         setShowNewEventModal(true);
-    }  */   
+    } */   
 
     const displayModal = (eventId) => {
         
@@ -82,6 +91,7 @@ export const CalendarController = () => {
                 year={currentMonthMoment.format('YYYY')}
                 onPrev={decrementMonth} 
                 onNext={incrementMonth} 
+                onDateChange={onDateChange}
             />
         </ModalContext.Provider>
         </>
