@@ -5,6 +5,8 @@ const Cell = styled.div`
     border: 1px solid #eee;
     position: relative;
     height: 100%;
+    font-size: small;
+    font-weight: 700;
 
     /* &:hover {
         background-color: #eee;

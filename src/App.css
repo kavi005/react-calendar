@@ -122,8 +122,8 @@ button {
     border-radius: 8px;
     color: white;
     cursor: pointer;
-    font-size: 14px;
-    padding: 12px;
+    font-size: 12px;
+    padding: 10px;
 
     &:hover {
       background-color: #00509d;

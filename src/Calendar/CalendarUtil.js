@@ -33,6 +33,36 @@ export const segmentIntoWeeks = (dayMoments) => {
 }
 
 export const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// export const monthOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+export const monthOfTheYear = {
+        "January": "01", 
+        "February": "02",
+        "March":"03", 
+        "April": "04", 
+        "May": "05", 
+        "June": "06", 
+        "July": "07", 
+        "August": "08", 
+        "September": "09", 
+        "October": "10", 
+        "November": "11", 
+        "December": "12"
+    };
+
+export const getYearsList = (currentYear) => {
+    let yearList = [];
+
+    let currentYearInt = parseInt(currentYear.toString());
+
+    for (let i = currentYearInt - 10; i <= currentYearInt; i++) {
+        yearList.push(i.toString());
+    }
+    for (let i = currentYearInt + 1; i < currentYearInt + 10; i++) {
+        yearList.push(i.toString());
+    }
+
+    return yearList;
+}
 
 export const padWeekFront = (week, padWidth = null) => {
     return [...Array(7 - week.length).fill(padWidth), ...week];
