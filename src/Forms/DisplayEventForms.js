@@ -1,20 +1,8 @@
 import moment from "moment";
+import { formatDateTime } from "../Calendar/CalendarUtil";
 
 export const NewEventForm = ({selectedEvent}) => {
     const se = selectedEvent[0];
-
-    const formatDate = (date) => {
-        let startDate = '';
-        let startTime = '';
-
-        if (date) {
-            const splitDateTiem = date.split('T');
-            startDate = moment(splitDateTiem[0], 'YYYY-MM-DD').format('DD MMM YYYY');
-            startTime = moment(splitDateTiem[1], "HH:mm").format("hh:mm A");
-        }
-
-        return `${startDate} ${startTime}`;
-    }
 
     return (
         <>
@@ -29,11 +17,11 @@ export const NewEventForm = ({selectedEvent}) => {
             </tr>
             <tr>
                 <td><label className="detailhead">Start date:</label></td>
-                <td><label>{formatDate(se.eventStartTimestamp)}</label></td>  
+                <td><label>{formatDateTime(se.eventStartTimestamp)}</label></td>  
             </tr>
             <tr>
                 <td><label className="detailhead">End date:</label></td>
-                <td><label>{formatDate(se.eventEndTimestamp)}</label></td>  
+                <td><label>{formatDateTime(se.eventEndTimestamp)}</label></td>  
             </tr>
             <tr>
                 <td><label className="detailhead">Description:</label></td>
@@ -53,11 +41,11 @@ export const NewEventForm = ({selectedEvent}) => {
             </tr>
             <tr>
                 <td><label className="detailhead">Created at:</label></td>
-                <td><label>{formatDate(se.createdAt)}</label></td>  
+                <td><label>{formatDateTime(se.createdAt)}</label></td>  
             </tr>
             <tr>
                 <td><label className="detailhead">Updated at:</label></td>
-                <td><label>{formatDate(se.updatedAt)}</label></td>  
+                <td><label>{formatDateTime(se.updatedAt)}</label></td>  
             </tr>
             <tr><td>{"  "}</td></tr>
         </table>

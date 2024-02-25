@@ -40,3 +40,13 @@ export const getAllPropertiesOfEvent = () => {
 
     return eventDataList;
 }
+
+export const getAllPropertiesOfSelectedEvents = (events) => {
+    const filteredList = eventsData.filter(ev => events.indexOf(ev.id) !== -1);
+
+    return filteredList;
+}
+
+export const getEventDetailsByEventId = (eventId) => {
+    return eventsData.find(ev => ev.id === eventId);
+}

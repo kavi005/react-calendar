@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ModalBackground = styled.div`
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -17,13 +17,13 @@ const ModalBody = styled.div`
     width: 50%;
 `;
 
-export const Modal = ({ children, shouldShow, onRequestClose }) => {
+export const MyModal = ({ children, shouldShow, onRequestClose }) => {
 
     return (
         <>
         {shouldShow && (
             <ModalBackground>
-                <ModalBody>
+                <ModalBody onClick={e => e.stopPropagation()}>
                     {children}
                     <div><button className="modal-button" onClick={onRequestClose}>Close</button></div>
                 </ModalBody>

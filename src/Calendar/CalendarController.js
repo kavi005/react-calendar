@@ -1,14 +1,22 @@
 import moment from "moment";
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Calendar } from "./Calendar";
-import { Modal } from "../Modal/Modal";
+// import { MyModal } from "../Modal/MyModal";
 import { NewEventForm } from "../Forms/DisplayEventForms";
 import { getAllPropertiesOfEvent, getEventData } from "../Data/DataUtil";
 import { UserSessionContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { Dialog } from "@mui/material";
+import { EventHeader } from "./EventPlot/EventHeader";
+import { getWeekDayName } from "./CalendarUtil";
+import styled from "styled-components";
 
+const EventWrapper = styled.div`
+    margin: 0 15px 15px 15px;
+`;
 
 export const ModalContext = createContext();
+
 
 export const CalendarController = () => {
         
@@ -17,6 +25,7 @@ export const CalendarController = () => {
     const [events, setEvents] = useState([]);
     const [showNewEventModal, setShowNewEventModal] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null); 
+    const [weekDayName, setWeekDayName] = useState(''); 
 
     const [selectedEvent, setSelectedEvent] = useState(null);    
 
@@ -63,7 +72,9 @@ export const CalendarController = () => {
     const displayModal = (eventId) => {
         
         const selectedEvent = getAllPropertiesOfEvent().filter(ev => { return ev.id === eventId});
+        console.log(selectedEvent);
         const currEvent = events.filter(ev => ev.id === eventId);
+        setWeekDayName(getWeekDayName(selectedEvent[0].eventStartTimestamp));
         setSelectedDate(moment(currEvent[0].date, 'YYYY-MM-DD'));
         setSelectedEvent(selectedEvent);
         setShowNewEventModal(true);
@@ -71,12 +82,26 @@ export const CalendarController = () => {
 
     return (
         <>      
-        <Modal shouldShow={showNewEventModal} onRequestClose={() => {
+        {/* <MyModal shouldShow={showNewEventModal} onRequestClose={() => {
             setShowNewEventModal(false);
         }}>
             <h3><i>Event details - </i> { selectedDate && selectedDate.format('DD MMM YYYY') } </h3>
             <NewEventForm selectedEvent={selectedEvent} />
-        </Modal>
+        </MyModal> */}
+
+        <Dialog fullWidth maxWidth={"sm"} open={showNewEventModal} onClose={() => {
+            setShowNewEventModal(false);
+        }}>  
+            <EventHeader 
+                currentWeekDay={weekDayName} 
+                currentDate={selectedDate && selectedDate.format('DD MMM YYYY')} 
+                onClose={() => setShowNewEventModal(false)} />   
+            
+            <EventWrapper>
+                <NewEventForm selectedEvent={selectedEvent} />
+            </EventWrapper>  
+                      
+        </Dialog>
 
         <ModalContext.Provider value={displayModal}>        
             <Calendar            

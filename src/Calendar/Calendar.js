@@ -147,7 +147,7 @@ export const Calendar = ({ month, year, onPrev, onNext, onDateChange, getCellPro
                                             dateNumber={dayMoment.format('D')} 
                                             {...getCellProps(dayMoment)}>
 
-                                            </CalendarCell>
+                                          </CalendarCell>
                                         : <CalendarCell key={`${i}${j}`}></CalendarCell>}
                                     </CalendarCellWrap>
                                 )
