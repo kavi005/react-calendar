@@ -14,7 +14,7 @@ const EventBox = styled.div`
         padding: 6px;
         margin-bottom: 4px;
         cursor: pointer;
-        font-size: small;
+        font-size: x-small;
         font-weight: 500;
 
         &:hover {

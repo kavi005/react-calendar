@@ -10,18 +10,6 @@ const EventPlotWrapper = styled.div`
     margin: 0 15px 15px 15px;
 `;
 
-/* const chartEvents = [
-    {
-        eventName: "ready",
-        callback: ({ chartWrapper, google }) => {
-            const chart = chartWrapper.getChart();
-            google.visualization.events.addListener(chart, "select", e => {
-                console.log(chart);
-            });
-        }
-    }
-] */
-
 export const EventPlot = ({events, onClose}) => {
     const [currentDate, setCurrentDate] = useState('');
     const [currentWeekDay, setCurrentWeekDay] = useState('');
