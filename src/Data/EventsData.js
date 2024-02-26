@@ -1,7 +1,7 @@
 export const eventsData = [
   {
     "eventStartTimestamp": "2024-02-02T00:00:00Z",
-    "eventEndTimestamp": "2024-02-02T00:15:00Z",
+    "eventEndTimestamp": "2024-02-02T00:20:00Z",
     "displayName": "Team Sync",
     "cooldownDuration": "30s",
     "color": "#0B8C57",
@@ -21,7 +21,7 @@ export const eventsData = [
     "isDeleted": false
   },
   {
-    "eventStartTimestamp": "2024-02-02T00:15:00Z",
+    "eventStartTimestamp": "2024-02-02T00:20:00Z",
     "eventEndTimestamp": "2024-02-02T00:45:00Z",
     "displayName": "Sprint review",
     "cooldownDuration": "30s",
@@ -50,7 +50,7 @@ export const eventsData = [
     "color": "#0B8C57",
     "id": "8dfcad2c-988e-4ca8-be33-0e3dc8cba897",
     "description": "",
-    "name": "every-thursday-friday-Sprint-review",
+    "name": "every-thursday-friday-backlog-refine",
     "isRecurringEvent": true,
     "cleanupCompletedEvents": false,
     "progressState": "Created",

@@ -76,7 +76,7 @@ export const EventPlot = ({events, onClose}) => {
                 width="100%"
                 height="500px"
                 options={{
-                    colors: ["#1D267D", "#5C469C", "#0C134F"],
+                    colors: ["#0C134F", "#5C469C", "#1D267D"],
                     enableInteractivity: true
                 }}
                 chartEvents={chartEvents}
