@@ -35,13 +35,11 @@ export const getRecurrentEventData = () => {
     for (let i = 0; i < eventsDataRec.length; i++) { 
         
         const record = eventsDataRec[i];
-        // console.log(record);
         if (record.isRecurringEvent && record.iteration) {
 
             const parentId = record.parent;
             const recParent = eventsDataRec.find(ev => ev.id.toString() === parentId);
             const cronJob = recParent.schedule;
-
 
             const options = {
                 currentDate: new Date(getDateFromDateTimeString(recParent.startDate)),
@@ -73,6 +71,17 @@ export const getRecurrentEventData = () => {
             } catch (err) {
                 console.log('Error: ' + err.message);
             }
+        } else if(record.eventStartTimestamp && !record.isRecurringEvent) {
+            const startDate = moment(getDateFromDateTimeString(record.eventStartTimestamp), 'YYYY-MM-DD');
+            const startTime = moment(getTimeFromDateTimeString(record.eventStartTimestamp), "HH:mm").format("hh:mm A");
+
+            eventDataList.push({ id: record.id, 
+                name: record.displayName, 
+                time: startTime, 
+                date: startDate,
+                isRecurrent: record.isRecurringEvent,
+                bgColor: record.color
+            });
         }
     }
 
