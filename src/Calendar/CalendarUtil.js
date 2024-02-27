@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const getDaysInMonth = (monthMoment) => {
     const monthCopy = monthMoment.clone();
     monthCopy.startOf('month');
@@ -70,4 +72,47 @@ export const padWeekFront = (week, padWidth = null) => {
 
 export const padWeekBack = (week, padWidth = null) => {
     return [ ...week, ...Array(7 - week.length).fill(padWidth)];
+}
+
+export const getTimeAndMinute = (timeStamp) => {
+    const startDateTime = timeStamp;
+    const startTimeStamp = startDateTime.split('T');
+    const timeInHourAndMinutes = startTimeStamp[1].split(':');
+
+    return timeInHourAndMinutes;
+}
+
+export const formatDate = (date) => {
+    let startDate = '';
+
+    if (date) {
+        const splitDateTiem = date.split('T');
+        startDate = moment(splitDateTiem[0], 'YYYY-MM-DD').format('DD MMM YYYY');
+    }
+
+    return startDate;
+}
+
+export const formatDateTime = (date) => {
+    let startDate = '';
+    let startTime = '';
+
+    if (date) {
+        const splitDateTiem = date.split('T');
+        startDate = moment(splitDateTiem[0], 'YYYY-MM-DD').format('DD MMM YYYY');
+        startTime = moment(splitDateTiem[1], "HH:mm").format("hh:mm A");
+    }
+
+    return `${startDate} ${startTime}`;
+}
+
+export const getWeekDayName = (date) => {
+    let weekDay = '';
+
+    if (date) {
+        const splitDateTiem = date.split('T');
+        weekDay = moment(splitDateTiem[0], 'YYYY-MM-DD').format('dddd');
+    }
+
+    return weekDay.toString();
 }
