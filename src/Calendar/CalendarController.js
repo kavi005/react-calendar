@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Calendar } from "./Calendar";
 // import { MyModal } from "../Modal/MyModal";
 import { NewEventForm } from "../Forms/DisplayEventForms";
-import { getAllPropertiesOfEvent, getEventData } from "../Data/DataUtil";
+import { getAllPropertiesOfEvent, getEventData, getRecurrentEventData } from "../Data/DataUtil";
 import { UserSessionContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { Dialog } from "@mui/material";
@@ -37,7 +37,10 @@ export const CalendarController = () => {
         if(!token) {            
             navigate("/login");          
         }
-        const eventData = getEventData();
+        // const eventData = getEventData();
+        const eventData = getRecurrentEventData();
+        // const eventDataRec = getRecurrentEventData();
+        
         setEvents(eventData);
     }, [userSessionContext]);
 

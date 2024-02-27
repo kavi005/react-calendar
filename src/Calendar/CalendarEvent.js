@@ -7,8 +7,8 @@ const EventBox = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        // background-color: ${(props) => (props.bgColor)};
-        background-color: black;
+        background-color: ${({ bgColor }) => bgColor || "black"};
+        // background-color: black;
         border-radius: 4px;
         color: white;
         padding: 6px;

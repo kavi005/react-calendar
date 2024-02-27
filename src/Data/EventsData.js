@@ -107,7 +107,7 @@ export const eventsData = [
   },
   {
     "eventDuration": "15m",
-    "endDate": "2024-03-21T14:11:00Z",
+    "endDate": "2024-06-21T14:11:00Z",
     "startDate": "2024-03-18T13:04:00Z",
     "displayName": "Team Sync",
     "color": "#0B8C57",

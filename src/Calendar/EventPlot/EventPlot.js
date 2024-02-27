@@ -22,7 +22,6 @@ export const EventPlot = ({events, onClose}) => {
         setCurrentWeekDay(weekDayName);
 
         const currentFormattedDate = formatDate(eventNode.eventStartTimestamp);
-        console.log(weekDayName, currentFormattedDate);
         setCurrentDate(currentFormattedDate);
     }, []);
 
@@ -76,7 +75,7 @@ export const EventPlot = ({events, onClose}) => {
                 width="100%"
                 height="500px"
                 options={{
-                    colors: ["#0C134F", "#5C469C", "#1D267D"],
+                    colors: ["#071952", "#35A29F", "#92BA92"],
                     enableInteractivity: true
                 }}
                 chartEvents={chartEvents}

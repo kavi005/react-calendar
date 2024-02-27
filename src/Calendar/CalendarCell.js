@@ -59,6 +59,7 @@ export const CalendarCell = ({ dateNumber = '', events = [] }) => {
                 name={event.name} 
                 time={event.time}
                 isRecurrent={event.isRecurrent}
+                bgColor={event.bgColor}
                 />)}
         </Cell>
         </>
