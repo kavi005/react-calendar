@@ -30,24 +30,25 @@ describe('Calendar', () => {
   it('renders calendar controls and table', () => {
     render(<Calendar {...defaultProps} />);
     expect(screen.getByText('Today')).toBeInTheDocument();
-    expect(screen.getAllByRole('button').length).toBeGreaterThanOrEqual(3); // Today, Prev, Next
+    // There should be at least 3 buttons: Today, Prev, Next
+    expect(screen.getAllByRole('button').length).toBeGreaterThanOrEqual(3);
     expect(screen.getAllByRole('option').length).toBeGreaterThan(0); // Month/year options
-    // Check days of the week
-    ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(day => {
+    // Check days of the week (full names)
+    ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].forEach(day => {
       expect(screen.getByText(day)).toBeInTheDocument();
     });
   });
 
   it('calls onPrev when left arrow is clicked', () => {
     render(<Calendar {...defaultProps} />);
-    const leftButton = screen.getAllByRole('button')[1];
+    const leftButton = screen.getByLabelText('Previous Month');
     fireEvent.click(leftButton);
     expect(mockOnPrev).toHaveBeenCalled();
   });
 
   it('calls onNext when right arrow is clicked', () => {
     render(<Calendar {...defaultProps} />);
-    const rightButton = screen.getAllByRole('button')[3] || screen.getAllByRole('button')[2];
+    const rightButton = screen.getByLabelText('Next Month');
     fireEvent.click(rightButton);
     expect(mockOnNext).toHaveBeenCalled();
   });
@@ -62,6 +63,7 @@ describe('Calendar', () => {
   it('calls onDateChange when month is changed', () => {
     render(<Calendar {...defaultProps} />);
     const monthSelect = screen.getAllByRole('combobox')[0];
+    // Change to a valid month name
     fireEvent.change(monthSelect, { target: { value: 'February' } });
     expect(mockOnDateChange).toHaveBeenCalledWith('February');
   });
@@ -69,6 +71,7 @@ describe('Calendar', () => {
   it('calls onDateChange when year is changed', () => {
     render(<Calendar {...defaultProps} />);
     const yearSelect = screen.getAllByRole('combobox')[1];
+    // Change to a year that should be in the list
     fireEvent.change(yearSelect, { target: { value: '2025' } });
     expect(mockOnDateChange).toHaveBeenCalledWith('2025');
   });
