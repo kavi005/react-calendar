@@ -108,7 +108,7 @@ export const Calendar = ({ month, year, onPrev, onNext, onDateChange, getCellPro
                 <CalendarControls>
                     <TodayControl><button onClick={onToday}>Today</button></TodayControl>
                     <NavigationControl>
-                        <button onClick={onPrev}><FaArrowLeft /></button>
+                        <button aria-label="Previous Month" onClick={onPrev}><FaArrowLeft /></button>
                         <select value={selectedMonth} onChange={onMonthChange}>
                             {monthsList.map((month, i) => (
                                 <option key={i} value={month}>{month}</option>
@@ -119,7 +119,7 @@ export const Calendar = ({ month, year, onPrev, onNext, onDateChange, getCellPro
                                 <option key={j} value={year}>{year}</option>
                             ))}
                         </select>                    
-                        <button onClick={onNext}><FaArrowRight /></button>
+                        <button aria-label="Next Month" onClick={onNext}><FaArrowRight /></button>
                     </NavigationControl>
                 </CalendarControls>                
             </CalendarControlsWrap>
